@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "注册";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="">
+                @*<div class="form-group has-success has-feedback">
+                    <label>用户名</label>
+                    <input type="text" class="form-control" name="Account">
+                    <span class="glyphicon glyphicon-user glyphicon  form-control-feedback"></span>
+                </div>*@
+                <div class="form-group has-warning has-feedback">
+                    <label>密码</label>
+                    <input type="text" class="form-control" name="UserPwd">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+
+                <div class="form-group has-error has-feedback">
+                    <label>确认密码</label>
+                    <input type="text" class="form-control" name="PwdRepeat">
+                    <span class="glyphicon glyphicon-signal form-control-feedback"></span>
+                </div>
+                <div class="form-group has-error has-feedback">
+                    <label>身份证</label>
+                    <input type="text" class="form-control" name="IDCard">
+                    <span class="glyphicon glyphicon-signal form-control-feedback"></span>
+                </div>
+                <div class="form-group has-error has-feedback">
+                    <label>手机</label>
+                    <input type="text" class="form-control" name="Phone">
+                    <span class="glyphicon glyphicon-signal form-control-feedback"></span>
+                </div>
+                <div class="form-group has-error has-feedback">
+                    <label>邮箱</label>
+                    <input type="text" class="form-control" name="Email">
+                    <span class="glyphicon glyphicon-signal form-control-feedback"></span>
+                </div>
+                <div class="form-group">
+                    <p>性别</p>
+                    <label class="radio-inline">
+                        <input type="radio" value="1" name="Gender" checked="checked">男
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="2" name="Gender">女
+                    </label>
+                </div> 
+                <div class="form-group has-error has-feedback">
+                    <label>地址</label>
+                    <input type="text" class="form-control" name="UserAddress">
+                    <span class="glyphicon glyphicon-signal form-control-feedback"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">确认</button>
+                    <button type="reset" class="btn btn-warning">取消</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+</div>
+
+<script>
+    $("form").submit(function (e) {
+        e.preventDefault();
+        $("form").ajaxSubmit({
+            type: 'post',
+            url: "@Url.Action("Register")",
+            success: function (data) {
+                console.log(data);
+                if (data.Code !== "0") {
+                    alert(data.Msg);
+                } else {
+                    alert("注册成功");
+                    window.location.href = location.origin;
+                }
+            },
+            error: function () {
+                alert("请求失败");
+            }
+        });
+    });
+</script>
